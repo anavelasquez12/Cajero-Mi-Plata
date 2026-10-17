@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi Plata Financial Bank</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Logo reutilizable (hexágono con circuito) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="logo-mp" viewBox="0 0 48 48">
+      <polygon points="24,3 42,13.5 42,34.5 24,45 6,34.5 6,13.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M24 11v26M15 18l9 6 9-6M15 30l9-6 9 6" fill="none" stroke="#3a9bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="24" cy="24" r="2.5" fill="#3a9bff"/>
+    </symbol>
+  </svg>
+
+  <!-- =============================================================
+       SITIO PÚBLICO: inicio, login y registro (comparten header y footer)
+       ============================================================= -->
+  <div id="sitio">
+
+    <header class="sitio-barra">
+      <button class="logo logo-btn" data-ir="inicio" aria-label="Ir al inicio">
+        <svg class="logo-svg"><use href="#logo-mp"/></svg>
+        <span class="logo-texto">Mi Plata</span>
+      </button>
+      <nav class="sitio-menu" aria-label="Navegación principal">
+        <button data-ir="inicio">Inicio</button>
+        <button data-ir="login">Iniciar sesión</button>
+        <button data-ir="registro" class="btn-borde">Registrarse</button>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- ---------- LANDING ---------- -->
+      <section id="vista-inicio" class="vista">
+
+        <div class="hero">
+          <div class="hero-texto">
+            <p class="etiqueta">Financial Bank</p>
+            <h1>Tu plata, segura y siempre a la mano.</h1>
+            <p class="hero-sub">Ahorra, paga, transfiere y compra a cuotas desde un solo lugar. Abre tu cuenta en minutos y opera con tus productos Mi Plata.</p>
+            <div class="hero-botones">
+              <button class="btn btn-azul" data-ir="registro">Abrir mi cuenta</button>
+              <button class="btn btn-borde" data-ir="login">Ya soy cliente</button>
+            </div>
+            <p class="pista">Cuentas de prueba: <strong>demo</strong> / <strong>1234</strong> (cliente) · <strong>admin</strong> / <strong>admin123</strong> (administrador)</p>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="tarjeta-visual">
+              <div class="tv-fila">
+                <svg class="logo-svg tv-logo"><use href="#logo-mp"/></svg>
+                <span class="tv-banco">MI PLATA</span>
+              </div>
+              <div class="tv-chip"></div>
+              <p class="tv-numero">•••• •••• •••• 2026</p>
+              <p class="tv-pie">FINANCIAL BANK</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="seccion">
+          <h2>Productos pensados para ti</h2>
+          <div class="grilla-3">
+            <article class="producto-info">
+              <h3>Cuenta de Ahorros</h3>
+              <p>Guarda tu dinero a mediano y largo plazo. Consigna y retira cuando quieras: al retirar se abona un rendimiento del <strong>1,5% mensual</strong>.</p>
+            </article>
+            <article class="producto-info">
+              <h3>Cuenta Corriente</h3>
+              <p>Para tu día a día: nómina, facturas y transferencias. Sin intereses y con <strong>sobregiro del 20%</strong> sobre tu saldo.</p>
+            </article>
+            <article class="producto-info">
+              <h3>Tarjeta de Crédito</h3>
+              <p>Compra a cuotas con un cupo asignado. Sin interés hasta 2 cuotas y siempre verás tu <strong>pago mensual</strong> antes de confirmar.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="seccion seccion-alt">
+          <div class="dos-bloques">
+            <div>
+              <h2>Quiénes somos</h2>
+              <p>Mi Plata Financial Bank es una sucursal digital creada para que gestiones tu dinero de forma simple, clara y segura. Combinamos tecnología y atención cercana para que cada operación sea fácil de entender.</p>
+            </div>
+            <ol class="pasos">
+              <li><strong>Regístrate</strong><span>Crea tu usuario con tus datos básicos.</span></li>
+              <li><strong>Inicia sesión</strong><span>Tienes 3 intentos para proteger tu cuenta.</span></li>
+              <li><strong>Opera</strong><span>Consigna, retira, transfiere y revisa tus movimientos.</span></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- LOGIN ---------- -->
+      <section id="vista-login" class="vista oculto">
+        <div class="auth">
+          <div class="auth-lado">
+            <svg class="logo-svg logo-grande"><use href="#logo-mp"/></svg>
+            <h2>Bienvenido de nuevo</h2>
+            <p>Ingresa con tu usuario y contraseña para acceder a tus productos.</p>
+          </div>
+          <form id="form-login" class="caja" novalidate>
+            <h3>Iniciar sesión</h3>
+            <label for="login-usuario">Usuario</label>
+            <input type="text" id="login-usuario" autocomplete="username">
+
+            <label for="login-clave">Contraseña</label>
+            <input type="password" id="login-clave" autocomplete="current-password">
+
+            <p id="contador-intentos" class="contador">Intentos fallidos: 0 de 3</p>
+            <p id="msg-login" class="msg" role="alert"></p>
+
+            <button type="submit" id="btn-ingresar" class="btn btn-azul btn-ancho">Ingresar</button>
+            <p class="cambio">¿No tienes cuenta? <button type="button" class="enlace" data-ir="registro">Regístrate</button></p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ---------- REGISTRO ---------- -->
+      <section id="vista-registro" class="vista oculto">
+        <div class="auth">
+          <div class="auth-lado">
+            <svg class="logo-svg logo-grande"><use href="#logo-mp"/></svg>
+            <h2>Abre tu cuenta Mi Plata</h2>
+            <p>Al registrarte recibes una Cuenta de Ahorros, una Cuenta Corriente y una Tarjeta de Crédito.</p>
+          </div>
+          <form id="form-registro" class="caja" novalidate>
+            <h3>Registro de cliente</h3>
+            <label for="reg-id">Identificación (cédula o pasaporte)</label>
+            <input type="text" id="reg-id" autocomplete="off">
+
+            <label for="reg-nombre">Nombre completo</label>
+            <input type="text" id="reg-nombre" autocomplete="name">
+
+            <div class="dos-col">
+              <div>
+                <label for="reg-celular">Celular</label>
+                <input type="tel" id="reg-celular" inputmode="numeric" placeholder="10 dígitos">
+              </div>
+              <div>
+                <label for="reg-usuario">Usuario</label>
+                <input type="text" id="reg-usuario" autocomplete="off" placeholder="3 a 15 caracteres">
+              </div>
+            </div>
+
+            <div class="dos-col">
+              <div>
+                <label for="reg-clave">Contraseña</label>
+                <input type="password" id="reg-clave" autocomplete="new-password" placeholder="Mínimo 4">
+              </div>
+              <div>
+                <label for="reg-clave2">Confirmar contraseña</label>
+                <input type="password" id="reg-clave2" autocomplete="new-password">
+              </div>
+            </div>
+
+            <p id="msg-registro" class="msg" role="alert"></p>
+            <button type="submit" class="btn btn-azul btn-ancho">Crear cuenta</button>
+            <p class="cambio">¿Ya eres cliente? <button type="button" class="enlace" data-ir="login">Inicia sesión</button></p>
+          </form>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="pie">
+      <div class="pie-grid">
+        <div>
+          <div class="logo">
+            <svg class="logo-svg"><use href="#logo-mp"/></svg>
+            <span class="logo-texto">Mi Plata</span>
+          </div>
+          <p class="suave">Mi Plata Financial Bank<br>Sucursal digital · Proyecto de aula CESDE</p>
+        </div>
+        <div>
+          <h4>Enlaces</h4>
+          <button class="enlace" data-ir="inicio">Inicio</button>
+          <button class="enlace" data-ir="login">Iniciar sesión</button>
+          <button class="enlace" data-ir="registro">Registrarse</button>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <p class="suave">contacto@miplata.com<br>Línea de atención: 604 000 0000</p>
+        </div>
+        <div>
+          <h4>Síguenos</h4>
+          <div class="redes">
+            <a href="#" aria-label="Facebook">Facebook</a>
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <a href="#" aria-label="X">X</a>
+            <a href="#" aria-label="LinkedIn">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <p class="pie-legal">© 2026 Mi Plata Financial Bank. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+
+
+  <!-- =============================================================
+       PANEL DEL CAJERO (solo con sesión iniciada)
+       ============================================================= -->
+  <div id="app" class="app oculto">
+
+    <header class="app-barra">
+      <div class="logo">
+        <svg class="logo-svg"><use href="#logo-mp"/></svg>
+        <span class="logo-texto">Mi Plata</span>
+      </div>
+      <p id="saludo" class="saludo"></p>
+    </header>
+
+    <div class="app-cuerpo">
+
+      <nav class="menu-op" aria-label="Operaciones">
+        <button class="op" data-op="saldo">Consultar saldo</button>
+        <button class="op" data-op="consignar">Consignar dinero</button>
+        <button class="op" data-op="retirar">Retirar dinero</button>
+        <button class="op" data-op="movimientos">Ver movimientos</button>
+        <button class="op" data-op="transferir">Transferir</button>
+        <button class="op" data-op="comprar">Comprar con tarjeta</button>
+        <button class="op" data-op="perfil">Perfil y seguridad</button>
+        <button class="op oculto" id="btn-admin" data-op="admin">Administración</button>
+        <button class="op op-salir" data-op="salir">Cerrar sesión</button>
+      </nav>
+
+      <section class="app-contenido">
+        <div id="productos" class="productos" aria-label="Mis productos"></div>
+        <div id="area" class="area"></div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Avisos flotantes -->
+  <div id="avisos" class="avisos" aria-live="polite"></div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
